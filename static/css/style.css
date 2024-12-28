@@ -1,0 +1,191 @@
+:root {
+    --ios-blue: #007AFF;
+    --ios-background: #F2F2F7;
+    --ios-gray: #8E8E93;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: white;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.source-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.source-top {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.sources-row {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    background: #f5f5f5;
+    border: 2px solid #000;
+    padding: 40px;
+    margin: 20px 0;
+}
+
+.center-point {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.ear-point {
+    width: 40px;
+    height: 40px;
+    background: #4CAF50;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+}
+
+.source-box {
+    background: white;
+    border: 1px solid #000;
+    padding: 15px;
+    margin: 10px;
+    min-width: 200px;
+}
+
+.source-number {
+    color: #000;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.paired-source {
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+    margin: 8px 0;
+}
+
+.input-group label {
+    width: 50px;
+    text-align: right;
+    margin-right: 10px;
+}
+
+.input-group input {
+    width: 60px;
+    padding: 4px;
+    border: 1px solid #ccc;
+    text-align: center;
+}
+
+.input-group span {
+    margin-left: 5px;
+    color: #666;
+}
+
+.source-point {
+    width: 30px;
+    height: 30px;
+    background: #FFD700;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+}
+
+.left-sources, .right-sources {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.add-button {
+    width: 24px;
+    height: 24px;
+    background: #fff;
+    border: 2px solid #000;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 18px;
+    margin: 10px;
+}
+
+.source-group {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.connection-line {
+    position: absolute;
+    background: #000;
+    height: 2px;
+}
+
+.formula-container {
+    margin-top: 40px;
+    padding: 20px;
+    background: #f5f5f5;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.formula-item {
+    margin-bottom: 20px;
+}
+
+.formula-item h3 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.formula-item p {
+    margin: 5px 0;
+    color: #666;
+    font-family: monospace;
+}
+
+.delay-input {
+    background-color: #f5f5f5;
+    cursor: not-allowed;
+}
+
+.delay-input:focus {
+    outline: none;
+}
+
+.equivalent-distance {
+    margin: 4px 0;
+    padding-left: 60px;
+    color: #666;
+    font-size: 0.9em;
+}
+
+.equiv-value {
+    font-family: monospace;
+    color: #333;
+} 

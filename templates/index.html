@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>延时计算器</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="source-container">
+            <!-- 顶部声源 -->
+            <div class="source-group top">
+                <div class="source-box">
+                    <div class="source-number">No.0 / 声源0</div>
+                    <div class="input-group">
+                        <label>距离 / Distance:</label>
+                        <input type="text" class="distance-input" data-source="0">
+                        <span>cm</span>
+                    </div>
+                    <div class="input-group">
+                        <label>延时 / Delay:</label>
+                        <input type="text" class="delay-input" data-source="0" readonly>
+                        <span>ms</span>
+                    </div>
+                    <div class="distance-info"></div>
+                </div>
+                <div class="source-point">0</div>
+            </div>
+
+            <!-- 主要区域 -->
+            <div class="sources-row">
+                <!-- 左侧声源 -->
+                <div class="left-sources">
+                    <div class="source-group">
+                        <div class="source-box">
+                            <div class="source-number">No.1 / 声源1</div>
+                            <div class="paired-source">配对 / Paired with: No.2</div>
+                            <div class="input-group">
+                                <label>距离 / Distance:</label>
+                                <input type="text" class="distance-input" data-source="1">
+                                <span>cm</span>
+                            </div>
+                            <div class="input-group">
+                                <label>延时 / Delay:</label>
+                                <input type="text" class="delay-input" data-source="1" readonly>
+                                <span>ms</span>
+                            </div>
+                            <div class="distance-info"></div>
+                        </div>
+                        <div class="source-point">1</div>
+                        <button class="add-button">+</button>
+                    </div>
+                </div>
+
+                <!-- 中心点 -->
+                <div class="center-point">
+                    <div class="ear-point">H</div>
+                </div>
+
+                <!-- 右侧声源 -->
+                <div class="right-sources">
+                    <div class="source-group">
+                        <div class="source-box">
+                            <div class="source-number">No.2 / 声源2</div>
+                            <div class="paired-source">配对 / Paired with: No.1</div>
+                            <div class="input-group">
+                                <label>距离 / Distance:</label>
+                                <input type="text" class="distance-input" data-source="2">
+                                <span>cm</span>
+                            </div>
+                            <div class="input-group">
+                                <label>延时 / Delay:</label>
+                                <input type="text" class="delay-input" data-source="2" readonly>
+                                <span>ms</span>
+                            </div>
+                            <div class="distance-info"></div>
+                        </div>
+                        <div class="source-point">2</div>
+                        <button class="add-button">+</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 添加底部说明 -->
+        <div class="formula-container">
+            <div class="formula-item">
+                <h3>计算公式 / Formulas:</h3>
+                <p>延时 / Delay (ms) = (距离差 / Distance Difference (cm) / 声速 / Speed of Sound (cm/s)) × 1000</p>
+                <p>距离 / Distance (cm) = 基准距离 / Base Distance (cm) + (延时 / Delay (ms) × 声速 / Speed of Sound (cm/s) / 1000)</p>
+            </div>
+            <div class="formula-item">
+                <h3>参数说明 / Parameters:</h3>
+                <p>声速 / Speed of Sound = 343.213 m/s = 34321.3 cm/s</p>
+            </div>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html> 

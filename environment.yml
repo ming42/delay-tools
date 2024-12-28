@@ -1,0 +1,7 @@
+name: delay_tools
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - python=3.8
+  - flask=3.0.0 
