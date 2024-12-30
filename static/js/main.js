@@ -95,7 +95,7 @@ function collectInputData() {
     
     // 收集所有声源的输入数据
     document.querySelectorAll('.source-box').forEach(box => {
-        const sourceNumber = box.querySelector('.source-number').textContent.replace('No.', '');
+        const sourceNumber = box.querySelector('.source-number').textContent.split('/')[0].replace('No.', '').trim();
         const distanceInput = box.querySelector('.distance-input');
         const delayInput = box.querySelector('.delay-input');
         
@@ -121,33 +121,43 @@ function collectInputData() {
 function updateResults(result) {
     // 更新每个声源的计算结果
     Object.entries(result.sources || {}).forEach(([sourceNumber, values]) => {
-        const sourceBox = document.querySelector(`[data-source="${sourceNumber}"]`).closest('.source-box');
-        if (sourceBox) {
-            const distanceInput = sourceBox.querySelector('.distance-input');
-            const delayInput = sourceBox.querySelector('.delay-input');
-            
-            // 只更新非空输入框的值
-            if (values.distance !== undefined && distanceInput.value.trim() === '') {
-                distanceInput.value = values.distance.toFixed(2);
-            }
-            if (values.delay !== undefined) {
-                delayInput.value = values.delay.toFixed(2);
-            }
-            
-            // 始终更新等效距离显示
-            if (values.delay_distance !== undefined) {
-                sourceBox.querySelector('.delay-equiv-value').textContent = values.delay_distance.toFixed(2);
-            }
-            if (values.total_distance !== undefined) {
-                sourceBox.querySelector('.total-equiv-value').textContent = values.total_distance.toFixed(2);
-            }
+        // 使用更精确的选择器并添加错误检查
+        const sourceBox = document.querySelector(`.source-box:has([data-source="${sourceNumber}"])`);
+        if (!sourceBox) {
+            console.warn(`未找到声源 ${sourceNumber} 的元素`);
+            return; // 跳过这个声源的更新
+        }
+
+        const distanceInput = sourceBox.querySelector('.distance-input');
+        const delayInput = sourceBox.querySelector('.delay-input');
+        const delayEquivValue = sourceBox.querySelector('.delay-equiv-value');
+        const totalEquivValue = sourceBox.querySelector('.total-equiv-value');
+        
+        // 检查每个元素是否存在后再更新
+        if (distanceInput && values.distance !== undefined && distanceInput.value.trim() === '') {
+            distanceInput.value = values.distance.toFixed(2);
+        }
+        
+        if (delayInput && values.delay !== undefined) {
+            delayInput.value = values.delay.toFixed(2);
+        }
+        
+        if (delayEquivValue && values.delay_distance !== undefined) {
+            delayEquivValue.textContent = values.delay_distance.toFixed(2);
+        }
+        
+        if (totalEquivValue && values.total_distance !== undefined) {
+            totalEquivValue.textContent = values.total_distance.toFixed(2);
         }
     });
 }
 
 async function calculateAll() {
     const data = collectInputData();
-    if (Object.keys(data.sources).length === 0) return; // 如果没有输入数据，不发送请求
+    if (Object.keys(data.sources).length === 0) {
+        console.log('没有输入数据，跳过计算');
+        return;
+    }
     
     try {
         const response = await fetch('/calculate', {
@@ -157,6 +167,11 @@ async function calculateAll() {
             },
             body: JSON.stringify(data)
         });
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
         const result = await response.json();
         updateResults(result);
     } catch (error) {
